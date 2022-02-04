@@ -10,7 +10,7 @@ Hero::Hero ( ) {
 	size = (Vector2){ 1.0f, 0.431818182f };
 	velocity = (Vector3){ 0.4f, 0.0f, 0.0f };
 	timer = 0.0f;
-	H_AddCar( "trucks/1_Bodies/1_7.png" );
+	H_AddCar( "trucks/1_Bodies/13.png" );
 }
 
 Hero::~Hero ( ) {

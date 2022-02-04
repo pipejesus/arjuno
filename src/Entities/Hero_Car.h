@@ -26,8 +26,7 @@ public:
 	void Draw2D( Vector3 position );
 private:
 	Model model_main;
-	Model model_wheels_back;
-	Model model_wheels_front;
+	Model model_wheels;
 
 	Vector3 rel_position;
 	std::map<std::string, int> animations;
@@ -35,7 +34,10 @@ private:
 	int main_sprite_frame;
 	int main_sprite_frame_count;
 	float sprite_time_passed;
-	static Model HC_CreateModelMain ( std::string image_name, Vector2 hero_size );
+
+	std::vector<Texture> spritesheet_main;
+	Model HC_CreateModelMain ( std::string image_name, Vector2 hero_size );
+	static Model HC_CreateModelWheels();
 };
 
 

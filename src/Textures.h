@@ -16,6 +16,7 @@ public:
 	static void Create();
 	static void Destroy();
 	static Textures* Instance();
+	static Vector2 CalculateScale( Image &image );
 	void LoadImages( std::vector<std::string> images_paths );
 	Image GetImage( std::string image_path );
 

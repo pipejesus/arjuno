@@ -41,6 +41,7 @@ void Game::Run ( ) {
 	while ( ! WindowShouldClose() ) {
 		float dt = GetFrameTime();
 		double et = GetTime();
+
 		UpdateCamera( &(display.cam) );
 		G_UpdateCamera(dt, et);
 
@@ -69,7 +70,8 @@ void Game::G_InitDisplay() {
 }
 
 void Game::G_UpdateCamera( float dt, double et ) {
-	display.cam.position.x += display.cam_velocity.x * dt;
+	display.cam.position.x += display.cam_velocity.x * dt * 20;
+	UpdateCamera( &display.cam );
 	display.cam.target.x += display.cam_velocity.x * dt;
 }
 
@@ -79,6 +81,7 @@ void Game::G_DrawCamInfo() {
 	DrawText(pos.c_str(), 10, 100, 14, RED );
 	DrawText(tar.c_str(), 10, 140, 14, RED );
 }
+
 void Game::G_SetupCamera() {
 	display.cam.position = (Vector3){ 0.0f, 2.0f, 5.0f };
 	display.cam.target = (Vector3){ 0.0f, 0.0f, 0.0f };
