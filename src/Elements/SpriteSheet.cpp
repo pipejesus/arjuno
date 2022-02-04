@@ -14,10 +14,15 @@ Texture* SpriteSheet::GetCurrentFrameTexture ( ) {
 	return &(texture_frames[current_frame]);
 }
 
+int SpriteSheet::GetCurrentFrame() {
+	return current_frame;
+}
+
 void SpriteSheet::Update ( float dt, double et ) {
 	time_passed += dt;
 	if ( time_passed >= 1.0f ) {
 		time_passed = 0.0f;
+		previous_frame = current_frame;
 		current_frame = ( ++current_frame ) % frames_count;
 	}
 }
@@ -28,7 +33,7 @@ SpriteSheet::SpriteSheet ( std::vector<std::string> fnames ) {
 	}
 
 	frames_count = texture_frames.size();
-	current_frame = 0;
+	current_frame = previous_frame = 0;
 	time_passed = 0.0f;
 }
 
@@ -36,7 +41,7 @@ SpriteSheet::SpriteSheet ( std::string fn ) {
 	AddSingleTexture( fn );
 
 	frames_count = 1;
-	current_frame = 0;
+	current_frame = previous_frame = 0;
 	time_passed = 0.0f;
 }
 
@@ -48,4 +53,8 @@ void SpriteSheet::AddSingleTexture( std::string fn ) {
 
 SpriteSheet::SpriteSheet ( std::string fn, int frames_count ) {
 
+}
+
+bool SpriteSheet::HasFrameChanged ( ) {
+	return current_frame != previous_frame;
 }

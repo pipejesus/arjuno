@@ -19,11 +19,14 @@ public:
 	~SpriteSheet();
 
 	Texture* GetCurrentFrameTexture();
+	int GetCurrentFrame ( );
 	void Update( float dt, double et );
+	bool HasFrameChanged();
 
 protected:
 	int frames_count;
 	int current_frame;
+	int previous_frame;
 	float time_passed;
 	std::vector<Texture> texture_frames;
 
