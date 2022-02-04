@@ -989,7 +989,7 @@ Model LoadModelFromMesh(Mesh mesh)
 // Unload model (meshes/materials) from memory (RAM and/or VRAM)
 // NOTE: This function takes care of all model elements, for a detailed control
 // over them, use UnloadMesh() and UnloadMaterial()
-void UnloadModel(Model model)
+void  UnloadModel(Model model)
 {
     // Unload meshes
     for (int i = 0; i < model.meshCount; i++) UnloadMesh(model.meshes[i]);

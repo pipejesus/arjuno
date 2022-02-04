@@ -53,3 +53,9 @@ void Textures::LoadImages ( std::vector<std::string> images_paths ) {
 Image Textures::GetImage ( std::string image_path ) {
 	return images.at( image_path );
 }
+
+Vector2 Textures::CalculateScale ( Image &image ) {
+	Vector2 scale = { 1.0f, 1.0f };
+
+	return scale;
+}

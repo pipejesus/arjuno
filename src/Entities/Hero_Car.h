@@ -11,6 +11,7 @@
 #include "raylib.h"
 #include "raymath.h"
 #include "../Textures.h"
+#include "../Elements/SpriteSheet.h"
 
 enum class Hero_Car_Type {
 	MAIN,
@@ -24,18 +25,17 @@ public:
 	void Update( float dt, double et );
 	void Draw( Vector3 position );
 	void Draw2D( Vector3 position );
+
 private:
+	SpriteSheet* spritesheet_main;
 	Model model_main;
-	Model model_wheels_back;
-	Model model_wheels_front;
+	Model model_wheels;
 
 	Vector3 rel_position;
-	std::map<std::string, int> animations;
 	float wobble_start;
-	int main_sprite_frame;
-	int main_sprite_frame_count;
-	float sprite_time_passed;
-	static Model HC_CreateModelMain ( std::string image_name, Vector2 hero_size );
+
+	Model HC_CreateModelMain ( std::string image_name, Vector2 hero_size );
+	static Model HC_CreateModelWheels();
 };
 
 
