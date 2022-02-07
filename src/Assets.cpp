@@ -18,5 +18,6 @@ std::vector<std::string> Assets::trucks_bodies = {
 };
 
 std::vector<std::string> Assets::trucks_chassis = {
+		DIR_TRUCK_CHASSIS"1.png",
 		DIR_TRUCK_CHASSIS"5.png",
 };
