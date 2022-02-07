@@ -28,6 +28,7 @@ public:
 
 private:
 	SpriteSheet* spritesheet_main;
+	SpriteSheet* spritesheet_wheels;
 	Model model_main;
 	Model model_wheels;
 
@@ -35,7 +36,7 @@ private:
 	float wobble_start;
 
 	Model HC_CreateModelMain ( std::string image_name, Vector2 hero_size );
-	static Model HC_CreateModelWheels();
+	Model HC_CreateModelWheels();
 };
 
 

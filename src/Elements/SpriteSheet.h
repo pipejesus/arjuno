@@ -13,9 +13,9 @@
 
 class SpriteSheet {
 public:
-	explicit SpriteSheet( std::vector<std::string> fnames ); 	// a list of file names, each holding separate animation frame
+	explicit SpriteSheet( std::vector<std::string> fnames, int fps ); 	// a list of file names, each holding separate animation frame
 	explicit SpriteSheet( std::string fn );						// single-frame sprite
-	explicit SpriteSheet( std::string fn, int count );			// single-file multiple-frames
+	explicit SpriteSheet( std::string fn, int fps, int src_frame_width );			// single-file multiple-frames
 	~SpriteSheet();
 
 	Texture* GetCurrentFrameTexture();
@@ -29,8 +29,14 @@ protected:
 	int previous_frame;
 	float time_passed;
 	std::vector<Texture> texture_frames;
+	float frame_width_f;
+	float frame_height_f;
+	int frame_width_i;
+	int frame_height_i;
+	float FPS;
 
-	void AddSingleTexture ( std::string fn );
+	void SS_AddSingleTexture ( std::string fn );
+	void SS_GetFrameSize ( );
 };
 
 
