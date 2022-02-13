@@ -21,8 +21,8 @@ Hero_Car::Hero_Car ( std::string main_sprite_fn, Vector2 hero_size ) {
  * Hero Car Destructor.
  */
 Hero_Car::~Hero_Car ( ) {
-	delete spritesheet_main;
-	delete spritesheet_wheels;
+//	delete spritesheet_main;
+//	delete spritesheet_wheels;
 	UnloadModel( model_main );
 	UnloadModel( model_wheels );
 }

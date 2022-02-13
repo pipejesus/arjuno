@@ -5,9 +5,9 @@
 #include "SpriteSheet.h"
 
 SpriteSheet::~SpriteSheet ( ) {
-	for ( auto texture: texture_frames ) {
-		UnloadTexture( texture );
-	}
+//	for ( auto texture: texture_frames ) {
+//		UnloadTexture( texture );
+//	}
 }
 
 Texture* SpriteSheet::GetCurrentFrameTexture ( ) {
