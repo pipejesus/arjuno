@@ -36,6 +36,7 @@ void Hero_Car::HC_CreateModelMain( std::string image_name, Vector2 hero_size ) {
 	model_main = LoadModelFromMesh(mesh_main);
 	model_main.transform = MatrixMultiply( model_main.transform, MatrixRotateX( DEG2RAD * -90.0f ) );
 	model_main.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = *( spritesheet_main->GetCurrentFrameTexture() );
+    model_main.materials[0].shader = Game::display.car_shader;
 }
 
 /**
@@ -88,7 +89,7 @@ void Hero_Car::Draw ( Vector3 position ) {
 }
 
 void Hero_Car::Draw2D ( Vector3 position ) {
-	std::string napisik = "Hello" + std::to_string( spritesheet_main->GetCurrentFrame());
-	auto pos = GetWorldToScreen( position, Game::display.cam );
-	DrawText( napisik.c_str(), pos.x, pos.y - 35.0f, 14, BLACK);
+//	std::string napisik = "Hello" + std::to_string( spritesheet_main->GetCurrentFrame());
+//	auto pos = GetWorldToScreen( position, Game::display.cam );
+//	DrawText( napisik.c_str(), pos.x, pos.y - 35.0f, 14, BLACK);
 }

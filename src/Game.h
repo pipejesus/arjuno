@@ -5,6 +5,13 @@
 #ifndef ARJUNO_GAME_H
 #define ARJUNO_GAME_H
 
+
+#if defined(PLATFORM_DESKTOP)
+#define GLSL_VERSION            330
+#else   // PLATFORM_RPI, PLATFORM_ANDROID, PLATFORM_WEB
+#define GLSL_VERSION            100
+#endif
+
 #define SCR_W 1024
 #define SCR_H 768
 
@@ -19,7 +26,8 @@ struct G_Display {
 	Vector3 cam_velocity;
 	int scr_w;
 	int scr_h;
-    Shader main_shader;
+    Shader car_shader;
+    Shader transparent_shader;
 };
 
 class Game {
@@ -46,6 +54,10 @@ private:
 	void G_DestroyHero ( );
 	void G_DrawCamInfo ( );
 	void G_UpdateCamera ( float dt, double et );
+
+    void G_LoadShaders();
+
+    void G_UnloadShaders();
 };
 
 

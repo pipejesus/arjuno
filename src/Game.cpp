@@ -5,19 +5,13 @@
 
 Game* Game::instance = nullptr;
 
-G_Display Game::display = (G_Display){
-	{ 0 },
-	(Vector3){0.4f, 0.0f, 0.0f},
-	SCR_W,
-	SCR_H,
-    0
-};
+G_Display Game::display = (G_Display){{ 0 }, (Vector3){0.4f, 0.0f, 0.0f}, (int)SCR_W, (int)SCR_H, {}, {} };
 
 Game::Game ( ) {
 	G_InitDisplay();
 	G_InitTextures();
 	hero = new Hero();
-//    mountain = new Mountain();
+    mountain = new Mountain();
 }
 
 Game::~Game( ) {
@@ -26,7 +20,8 @@ Game::~Game( ) {
 void Game::CleanupBeforeExit() {
     G_DestroyHero();
     G_UnloadTextures();
-//    delete mountain;
+    delete mountain;
+    G_UnloadShaders();
     CloseWindow();
 }
 
@@ -61,7 +56,7 @@ void Game::Run ( ) {
 			ClearBackground(RAYWHITE );
 			BeginMode3D( display.cam );
 			{
-//                mountain->Draw();
+                mountain->Draw();
                 hero->Draw();
 				DrawGrid(100, 0.5);
 			}
@@ -74,7 +69,7 @@ void Game::Run ( ) {
 
 //        BeginDrawing();
 //            ClearBackground(RAYWHITE);
-//            BeginShaderMode( display.main_shader );
+//            BeginShaderMode( display.car_shader );
 //                DrawTextureRec(target.texture, (Rectangle){ 0, 0, (float)target.texture.width, (float)-target.texture.height }, (Vector2){ 0, 0 }, WHITE);
 //            EndShaderMode();
 //        EndDrawing();
@@ -83,13 +78,14 @@ void Game::Run ( ) {
 
 void Game::G_InitDisplay() {
 	InitWindow( SCR_W, SCR_H, "Arjuno" );
+    G_LoadShaders();
 	G_SetupCamera();
 }
 
 void Game::G_UpdateCamera( float dt, double et ) {
-//	display.cam.position.x += display.cam_velocity.x * dt * 20;
+	display.cam.position.x += display.cam_velocity.x * dt;
 	UpdateCamera( &display.cam );
-//	display.cam.target.x += display.cam_velocity.x * dt;
+	display.cam.target.x += display.cam_velocity.x * dt;
 }
 
 void Game::G_DrawCamInfo() {
@@ -99,9 +95,12 @@ void Game::G_DrawCamInfo() {
 	DrawText(tar.c_str(), 10, 140, 14, RED );
 }
 
-void Game::G_SetupCamera() {
-//    display.main_shader = LoadShader( 0, SHADERS_EX_330"grayscale.fs" );
+void Game::G_LoadShaders() {
+    display.car_shader = LoadShader(SHADERS_PATH_330"base.vs", SHADERS_PATH_330"grayscale.fs" );
+    display.transparent_shader = LoadShader(SHADERS_PATH_330"base.vs", SHADERS_PATH_330"alpha_discard.fs" );
+}
 
+void Game::G_SetupCamera() {
 	display.cam.position = (Vector3){ 0.0f, 2.0f, 5.0f };
 	display.cam.target = (Vector3){ 0.0f, 0.0f, 0.0f };
 	display.cam.up = (Vector3){ 0.0f, 1.0f, 0.0f };
@@ -125,4 +124,9 @@ void Game::G_UnloadTextures() {
 
 void Game::G_DestroyHero() {
 	delete hero;
+}
+
+void Game::G_UnloadShaders() {
+    UnloadShader( display.car_shader );
+    UnloadShader( display.transparent_shader );
 }
