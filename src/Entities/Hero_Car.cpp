@@ -13,7 +13,7 @@ Hero_Car::Hero_Car ( std::string main_sprite_fn, Vector2 hero_size ) {
 	wobble_start = (float)( rand() % 360 );
 	spritesheet_main = new SpriteSheet( (std::vector<std::string>){ DIR_TRUCK_BODIES"13.png", DIR_TRUCK_BODIES"13_2.png" }, 2 );
 	spritesheet_wheels = new SpriteSheet( DIR_TRUCK_CHASSIS"5.png", 14, 48 );
-	model_main = HC_CreateModelMain( main_sprite_fn, hero_size );
+	HC_CreateModelMain( main_sprite_fn, hero_size );
 	model_wheels = HC_CreateModelWheels();
 }
 
@@ -21,23 +21,21 @@ Hero_Car::Hero_Car ( std::string main_sprite_fn, Vector2 hero_size ) {
  * Hero Car Destructor.
  */
 Hero_Car::~Hero_Car ( ) {
-//	delete spritesheet_main;
-//	delete spritesheet_wheels;
-	UnloadModel( model_main );
-	UnloadModel( model_wheels );
+    UnloadModel( model_main );
+    UnloadModel( model_wheels );
+    delete spritesheet_main;
+    delete spritesheet_wheels;
 }
 
 /**
  * Creates the model for the current car.
  * Sets the texture and initial transform ( to rotate the plane to face the camera )
  */
-Model Hero_Car::HC_CreateModelMain( std::string image_name, Vector2 hero_size ) {
-	auto mesh = GenMeshPlane( hero_size.x, hero_size.y, 1, 1 );
-	auto model = LoadModelFromMesh(mesh);
-	model.transform = MatrixMultiply( model.transform, MatrixRotateX( DEG2RAD * -90.0f ) );
-	model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = *( spritesheet_main->GetCurrentFrameTexture() );
-
-	return model;
+void Hero_Car::HC_CreateModelMain( std::string image_name, Vector2 hero_size ) {
+	mesh_main = GenMeshPlane( hero_size.x, hero_size.y, 1, 1 );
+	model_main = LoadModelFromMesh(mesh_main);
+	model_main.transform = MatrixMultiply( model_main.transform, MatrixRotateX( DEG2RAD * -90.0f ) );
+	model_main.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = *( spritesheet_main->GetCurrentFrameTexture() );
 }
 
 /**

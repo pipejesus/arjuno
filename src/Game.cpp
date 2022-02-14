@@ -21,9 +21,13 @@ Game::Game ( ) {
 }
 
 Game::~Game( ) {
-	G_DestroyHero();
-	G_UnloadTextures();
+}
+
+void Game::CleanupBeforeExit() {
+    G_DestroyHero();
+    G_UnloadTextures();
 //    delete mountain;
+    CloseWindow();
 }
 
 void Game::Create ( ) {
@@ -31,7 +35,6 @@ void Game::Create ( ) {
 }
 
 void Game::Destroy ( ) {
-	CloseWindow();
 	delete instance;
 	instance = nullptr;
 }

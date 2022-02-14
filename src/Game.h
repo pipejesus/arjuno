@@ -28,6 +28,7 @@ public:
 	static void Create();
 	static void Destroy();
 	void Run();
+    void CleanupBeforeExit();
 
 	static G_Display display;
 
