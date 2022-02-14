@@ -29,13 +29,14 @@ public:
 private:
 	SpriteSheet* spritesheet_main;
 	SpriteSheet* spritesheet_wheels;
+    Mesh mesh_main;
 	Model model_main;
 	Model model_wheels;
 
 	Vector3 rel_position;
 	float wobble_start;
 
-	Model HC_CreateModelMain ( std::string image_name, Vector2 hero_size );
+	void HC_CreateModelMain ( std::string image_name, Vector2 hero_size );
 	Model HC_CreateModelWheels();
 };
 

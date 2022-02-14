@@ -17,6 +17,7 @@ Hero::~Hero ( ) {
 	for (auto c:cars) {
 		delete c;
 	}
+    cars.clear();
 }
 
 void Hero::Draw() {

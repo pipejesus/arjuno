@@ -8,6 +8,7 @@ SpriteSheet::~SpriteSheet ( ) {
 	for ( auto texture: texture_frames ) {
 		UnloadTexture( texture );
 	}
+    texture_frames.clear();
 }
 
 Texture* SpriteSheet::GetCurrentFrameTexture ( ) {

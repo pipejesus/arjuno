@@ -9,18 +9,25 @@ G_Display Game::display = (G_Display){
 	{ 0 },
 	(Vector3){0.4f, 0.0f, 0.0f},
 	SCR_W,
-	SCR_H
+	SCR_H,
+    0
 };
 
 Game::Game ( ) {
 	G_InitDisplay();
 	G_InitTextures();
 	hero = new Hero();
+//    mountain = new Mountain();
 }
 
 Game::~Game( ) {
-	G_DestroyHero();
-	G_UnloadTextures();
+}
+
+void Game::CleanupBeforeExit() {
+    G_DestroyHero();
+    G_UnloadTextures();
+//    delete mountain;
+    CloseWindow();
 }
 
 void Game::Create ( ) {
@@ -28,7 +35,6 @@ void Game::Create ( ) {
 }
 
 void Game::Destroy ( ) {
-	CloseWindow();
 	delete instance;
 	instance = nullptr;
 }
@@ -38,6 +44,9 @@ Game *Game::Instance ( ) {
 }
 
 void Game::Run ( ) {
+
+//    RenderTexture2D target = LoadRenderTexture(display.scr_w, display.scr_h );
+
 	while ( ! WindowShouldClose() ) {
 		float dt = GetFrameTime();
 		double et = GetTime();
@@ -47,12 +56,13 @@ void Game::Run ( ) {
 
 		hero->Update( dt, et );
 
-		BeginDrawing();
+        BeginDrawing();
 		{
-			ClearBackground(RAYWHITE);
+			ClearBackground(RAYWHITE );
 			BeginMode3D( display.cam );
 			{
-				hero->Draw();
+//                mountain->Draw();
+                hero->Draw();
 				DrawGrid(100, 0.5);
 			}
 			EndMode3D();
@@ -60,7 +70,14 @@ void Game::Run ( ) {
 			G_DrawCamInfo();
 			DrawFPS(10, 10);
 		}
-		EndDrawing();
+        EndDrawing();
+
+//        BeginDrawing();
+//            ClearBackground(RAYWHITE);
+//            BeginShaderMode( display.main_shader );
+//                DrawTextureRec(target.texture, (Rectangle){ 0, 0, (float)target.texture.width, (float)-target.texture.height }, (Vector2){ 0, 0 }, WHITE);
+//            EndShaderMode();
+//        EndDrawing();
 	}
 }
 
@@ -70,9 +87,9 @@ void Game::G_InitDisplay() {
 }
 
 void Game::G_UpdateCamera( float dt, double et ) {
-	display.cam.position.x += display.cam_velocity.x * dt * 20;
+//	display.cam.position.x += display.cam_velocity.x * dt * 20;
 	UpdateCamera( &display.cam );
-	display.cam.target.x += display.cam_velocity.x * dt;
+//	display.cam.target.x += display.cam_velocity.x * dt;
 }
 
 void Game::G_DrawCamInfo() {
@@ -83,6 +100,8 @@ void Game::G_DrawCamInfo() {
 }
 
 void Game::G_SetupCamera() {
+//    display.main_shader = LoadShader( 0, SHADERS_EX_330"grayscale.fs" );
+
 	display.cam.position = (Vector3){ 0.0f, 2.0f, 5.0f };
 	display.cam.target = (Vector3){ 0.0f, 0.0f, 0.0f };
 	display.cam.up = (Vector3){ 0.0f, 1.0f, 0.0f };

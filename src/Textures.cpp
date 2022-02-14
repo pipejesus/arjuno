@@ -26,7 +26,7 @@ void Textures::Destroy ( ) {
 }
 
 Textures::~Textures ( ) {
-	std::unordered_map< std::string, Image>:: iterator itr;
+	std::unordered_map< std::string, Image >:: iterator itr;
 	for ( itr = images.begin(); itr != images.end(); itr++) {
 		UnloadImage( itr->second );
 	}
