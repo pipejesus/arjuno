@@ -29,6 +29,7 @@ private:
     void M_CreateModel();
     Vector3 M_CalcModelPosition();
 
+    void M_GenerateImage(int img_w, int img_h);
 };
 
 

@@ -9,7 +9,7 @@
 #include <vector>
 #include <string>
 #include "raylib.h"
-#include "../Textures.h"
+#include "../Images.h"
 
 class SpriteSheet {
 public:

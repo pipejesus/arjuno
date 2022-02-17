@@ -5,6 +5,13 @@
 #ifndef ARJUNO_GAME_H
 #define ARJUNO_GAME_H
 
+
+#if defined(PLATFORM_DESKTOP)
+#define GLSL_VERSION            330
+#else   // PLATFORM_RPI, PLATFORM_ANDROID, PLATFORM_WEB
+#define GLSL_VERSION            100
+#endif
+
 #define SCR_W 1024
 #define SCR_H 768
 
@@ -13,13 +20,15 @@
 #include "Assets.h"
 #include "Entities/Hero.h"
 #include "Backgrounds/Mountain.h"
+#include "Input/InputHandler.h"
 
 struct G_Display {
 	Camera cam;
 	Vector3 cam_velocity;
 	int scr_w;
 	int scr_h;
-    Shader main_shader;
+    Shader car_shader;
+    Shader transparent_shader;
 };
 
 class Game {
@@ -35,6 +44,7 @@ public:
 private:
 	static Game *instance;
 	Hero *hero = nullptr;
+    InputHandler *input_handler;
     Mountain *mountain = nullptr;
 
 	Game();
@@ -46,6 +56,16 @@ private:
 	void G_DestroyHero ( );
 	void G_DrawCamInfo ( );
 	void G_UpdateCamera ( float dt, double et );
+
+    void G_LoadShaders();
+
+    void G_UnloadShaders();
+
+    void G_InitHero();
+
+    void G_InitHeroInput();
+
+    void G_DestroyHeroInput();
 };
 
 
