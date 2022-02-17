@@ -20,6 +20,7 @@
 #include "Assets.h"
 #include "Entities/Hero.h"
 #include "Backgrounds/Mountain.h"
+#include "Input/InputHandler.h"
 
 struct G_Display {
 	Camera cam;
@@ -43,6 +44,7 @@ public:
 private:
 	static Game *instance;
 	Hero *hero = nullptr;
+    InputHandler *input_handler;
     Mountain *mountain = nullptr;
 
 	Game();
@@ -58,6 +60,12 @@ private:
     void G_LoadShaders();
 
     void G_UnloadShaders();
+
+    void G_InitHero();
+
+    void G_InitHeroInput();
+
+    void G_DestroyHeroInput();
 };
 
 

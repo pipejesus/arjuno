@@ -89,7 +89,15 @@ void Hero_Car::Draw ( Vector3 position ) {
 }
 
 void Hero_Car::Draw2D ( Vector3 position ) {
-//	std::string napisik = "Hello" + std::to_string( spritesheet_main->GetCurrentFrame());
-//	auto pos = GetWorldToScreen( position, Game::display.cam );
-//	DrawText( napisik.c_str(), pos.x, pos.y - 35.0f, 14, BLACK);
+	std::string napisik {};
+	switch ( spritesheet_main->GetCurrentFrame() ) {
+		case 0:
+			napisik = "CHOCO";
+			break;
+		case 1:
+			napisik = "LOCO";
+			break;
+	}
+	auto pos = GetWorldToScreen( position, Game::display.cam );
+	DrawText( napisik.c_str(), pos.x, pos.y - 49.0f, 15, BLUE );
 }

@@ -18,9 +18,9 @@ void Mountain::M_GenerateImage( int img_w, int img_h ) {
     float step = 360.0f / (float)img_w;
 
     for ( int x = 0; x < img_w; ++x ) {
-        float yf = (sin(a * 8) * 80 ) + 80;
+        float yf = ( (sin(a * 20) * 140 ) + 140 ) * ( (sin(a * 20) * 10 ) + 10 );
         a+= DEG2RAD * step;
-        for ( int y = (int)yf; y < img_h; ++y ) {
+        for ( int y = (int)yf; y < img_h / 2; ++y ) {
 
             ImageDrawPixel( &image, x, y, img_fill_color );
         }
@@ -29,9 +29,9 @@ void Mountain::M_GenerateImage( int img_w, int img_h ) {
 
 void Mountain::M_CreateModel() {
 
-    mesh_size = (Vector3){ 10, 1, 1 };
-    model_position = (Vector3){5.0f, 0.0f, -2.0f };
-    model_position_offset = (Vector3){ -1 * mesh_size.x / 2, mesh_size.z, 0 };
+    mesh_size = (Vector3){ 100, 1, 1 };
+    model_position = (Vector3){0.0f, 0.0f, 0.0f };
+    model_position_offset = (Vector3){ -1 * mesh_size.x / 2, mesh_size.z, -10 };
 
     M_GenerateImage( 1024, 1024 );
     texture = LoadTextureFromImage( image );
@@ -49,13 +49,7 @@ Vector3 Mountain::M_CalcModelPosition() {
 
 void Mountain::Draw() {
     auto mountain_position = M_CalcModelPosition();
-    auto mountain_position_2 = Vector3Add(mountain_position, (Vector3){0.0f, 0.0f, -2.1f} );
-    auto mountain_position_3 = Vector3Add(mountain_position, (Vector3){0.0f, 0.0f, 4.5f} );
-    auto mountain_position_4 = Vector3Add(mountain_position, (Vector3){0.0f, 0.0f, 3.9f} );
-    DrawModel( model, mountain_position, 1.0f, (Color){0,190,0,255} );
-    DrawModel( model, mountain_position_2, 1.0f, (Color){0,120,0,255} );
-    DrawModel( model, mountain_position_3, 1.0f, (Color){50,60,65,255} );
-    DrawModel( model, mountain_position_4, 1.0f, (Color){60,70,75,255} );
+    DrawModel( model, mountain_position, 1.0f, (Color){0,120,0,255} );
 }
 
 Mountain::~Mountain() {

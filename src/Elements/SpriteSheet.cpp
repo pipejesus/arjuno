@@ -64,7 +64,7 @@ SpriteSheet::SpriteSheet ( std::string fn ) {
  * placed in columns, in one image file.
  */
 SpriteSheet::SpriteSheet ( std::string fn, int fps, int src_frame_width ) {
-	Image src = Textures::Instance()->GetImage( fn );
+	Image src = Images::Instance()->GetImage(fn );
 	auto src_w = (float)src.width;
 	auto src_h = (float)src.height;
 	int src_frames_count = (int)(src_w / (float)src_frame_width);
@@ -90,7 +90,7 @@ SpriteSheet::SpriteSheet ( std::string fn, int fps, int src_frame_width ) {
 }
 
 void SpriteSheet::SS_AddSingleTexture( std::string fn ) {
-	Image img = Textures::Instance()->GetImage( fn );
+	Image img = Images::Instance()->GetImage(fn );
 	Texture2D texture = LoadTextureFromImage( img );
 	texture_frames.push_back( texture );
 }
